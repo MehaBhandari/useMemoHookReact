@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useMemo} from 'react';
 
 export default function App() {
   const [count, setCount] = useState(1000);
@@ -7,12 +7,12 @@ export default function App() {
     console.log('returnValue function is called...');
     return inputVal+10;
   }
-
-  var calculatedValue = returnValue(10);
-
-  setTimeout(()=>{
-    setCount(count+1);
-  },1000)
+  
+  // var calculatedValue = returnValue(10);
+  
+  // An empty array will also solves our purpose
+  // var calculatedValue = useMemo(()=>returnValue(10),[]);
+  var calculatedValue = useMemo(()=>returnValue(10),[10]);
 
   return (
     <div>
@@ -24,3 +24,5 @@ export default function App() {
   )
     
 }
+// React’s useMemo hook enables us to memoize the result of the execution of a function with a given set of parameters. 
+// Next time the function is called with the same parameter, we can return the data that has been cached, rather than re-executing the entire function.
